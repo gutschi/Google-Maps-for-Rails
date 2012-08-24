@@ -238,6 +238,11 @@ class @Gmaps4RailsOpenlayers extends Gmaps4Rails
     @polylinesLayer.addFeatures([polyline])
 
     return polyline
+    
+    
+  clearPolylines: ->
+    @serviceObject.removeLayer(@polylinesLayer) if @polylinesLayer != null and @serviceObject.getLayer(@polylinesLayer.id) != null
+    @polylinesLayer = null
 
   updateBoundsWithPolylines: ()->
   
