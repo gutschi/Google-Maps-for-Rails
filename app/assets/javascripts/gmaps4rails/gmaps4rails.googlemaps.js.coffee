@@ -287,6 +287,13 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
     polyline.serviceObject = new_poly
     new_poly.setMap(@serviceObject)
 
+
+  clearPolylines: ()->
+    for polyline in @polylines
+      @clearPolyline polyline
+      
+  clearPolyline: (polyline) ->
+    polyline.serviceObject.setMap(null)
   
   updateBoundsWithPolylines: ()->
     for polyline in @polylines
