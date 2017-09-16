@@ -31,7 +31,6 @@ module Gmaps4rails
     def js_dependencies_array
       if scripts != :none
         get_vendor_scripts
-        get_gem_scripts
       end
       @js_array
     end
@@ -45,21 +44,7 @@ module Gmaps4rails
         :provider        => map_provider
       })
     end
-    
-    # gem's script aren't taken into account when asset pipeline is enabled:
-    # I assume they'll be within
-    def get_gem_scripts
-      unless gmaps4rails_pipeline_enabled?
-        @js_array << '/javascripts/gmaps4rails/gmaps4rails.base.js' unless scripts == :api
-        @js_array << case map_provider
-                     when "openlayers" then '/javascripts/gmaps4rails/gmaps4rails.openlayers.js'
-                     when "mapquest"   then '/javascripts/gmaps4rails/gmaps4rails.mapquest.js'
-                     when "bing"       then '/javascripts/gmaps4rails/gmaps4rails.bing.js'
-                     else                   '/javascripts/gmaps4rails/gmaps4rails.googlemaps.js'
-                     end
-      end
-    end
-    
+
     # vendor_scripts are the js libraries from the map providers
     def get_vendor_scripts
       case map_provider
